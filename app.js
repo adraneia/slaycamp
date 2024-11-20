@@ -27,13 +27,19 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
-app.get('/makeslayground', async (req, res) => {
-    //res.send('Helloo from yelp camp ^__^')
-    //res.render('home')
-    const slay = new Slayground({ title: 'My backyard', description: 'cheap slaying!' });
-    await slay.save(); 
-    res.send(slay)
+// app.get('/makeslayground', async (req, res) => {
+//     //res.send('Helloo from yelp camp ^__^')
+//     //res.render('home')
+//     const slay = new Slayground({ title: 'My backyard', description: 'cheap slaying!' });
+//     await slay.save();
+//     res.send(slay)
+// })
+
+app.get('/slaygrounds', async(req, res) => {
+    const slaygrounds = await Slayground.find({});
+    res.render('slaygrounds/index', {slaygrounds})
 })
+
 app.listen(3000, () => {
     console.log('serving on port 3000')
 })
